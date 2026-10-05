@@ -103,14 +103,16 @@ form.addEventListener("submit", async (event) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.error || "Não foi possível enviar sua resposta.");
+    const result = await response.json().catch(() => null);
+    if (!response.ok) throw new Error(result?.error || "Não foi possível enviar sua confirmação agora. Tente novamente em instantes.");
     document.getElementById("confirmation-panel").hidden = true;
     document.getElementById("sizes-panel").hidden = false;
     document.getElementById("success-greeting").textContent = "Resposta recebida, " + name + "!";
     document.getElementById("tamanhos").focus();
   } catch (error) {
-    errorMessage.textContent = error instanceof Error ? error.message : "Não foi possível enviar sua resposta. Tente novamente.";
+    errorMessage.textContent = error instanceof Error && (error.message.startsWith("Não foi possível") || error.message.startsWith("Confira"))
+      ? error.message
+      : "Não foi possível enviar sua confirmação agora. Tente novamente em instantes.";
     errorMessage.hidden = false;
   } finally {
     submitButton.disabled = false;
