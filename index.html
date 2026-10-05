@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffefa">
+  <meta name="description" content="Confirme sua presença na festa do Davi. Dia 12 de outubro, às 16h, no Residencial Águas do Cabo Branco.">
+  <title>Confirmação · Festa do Davi</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h2M14 14h2M8 18h2"/></symbol>
+    <symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="pin" viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h16M13 5l7 7-7 7"/></symbol>
+    <symbol id="shirt" viewBox="0 0 24 24"><path d="m16 3 5 3-2 5-3-1v11H8V10l-3 1-2-5 5-3a4 4 0 0 0 8 0Z"/></symbol>
+    <symbol id="shoe" viewBox="0 0 24 24"><path d="M3 16c4 0 5-2 6-5l2 1 2-1 2 2 3 1c2 1 3 2 3 4v2H3Z"/><path d="M3 17h18M11 12l-1 2M14 13l-1 2"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
+    <symbol id="chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  </svg>
+
+  <main class="inv-page">
+    <section class="invite-shell" aria-label="Convite e confirmação da festa do Davi">
+      <div class="invite-top">
+        <img class="top-bird" src="images/arara.png" alt="Arara vermelha tocando flauta">
+        <p class="invite-kicker">Uma festa no ritmo do</p>
+        <h1 class="invite-name" aria-label="Davi"><span>D</span><span>a</span><span>v</span><span>i</span></h1>
+        <p class="invite-intro">Uma tarde de música, brincadeiras e muita alegria espera por você!</p>
+      </div>
+
+      <div class="event-details" aria-label="Informações da festa">
+        <div><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><use href="#calendar"/></svg><strong>12/10</strong><span>segunda-feira</span></div>
+        <div><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><use href="#clock"/></svg><strong>16h</strong><span>vem festejar!</span></div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Residencial%20%C3%81guas%20do%20Cabo%20Branco%2C%20%C3%81guas%20Claras%2C%20Bras%C3%ADlia%20DF" target="_blank" rel="noopener noreferrer" aria-label="Abrir localização no mapa"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><use href="#pin"/></svg><strong>Águas do Cabo Branco</strong><span>Águas Claras · abrir mapa ↗</span></a>
+      </div>
+
+      <div class="invite-body">
+        <div class="band-stage" role="img" aria-label="Ilustração do Davi com a bandinha do convite">
+          <span class="floating-note note-one">♫</span>
+          <span class="floating-note note-two">♪</span>
+          <img class="band-lion" src="images/leao.png" alt="">
+          <img class="band-giraffe" src="images/girafa.png" alt="">
+          <img class="band-davi" src="images/davi.png" alt="">
+          <img class="band-monkey" src="images/macaco.png" alt="">
+        </div>
+
+        <div class="invite-panel" id="confirmation-panel">
+          <p class="panel-kicker">Você faz parte dessa festa!</p>
+          <h2>Confirme sua presença</h2>
+          <p class="panel-description">Conte para a família do Davi se você vem celebrar com a gente.</p>
+          <form id="rsvp-form" class="confirm-form">
+            <label for="guest-name">Seu nome</label>
+            <input id="guest-name" name="name" type="text" autocomplete="name" maxlength="80" minlength="2" placeholder="Digite seu nome" required>
+
+            <div class="guest-counts" id="guest-counts">
+              <div><label for="adults">Adultos</label><input id="adults" name="adults" type="number" min="1" max="20" value="1" required></div>
+              <div><label for="children">Crianças</label><input id="children" name="children" type="number" min="0" max="20" value="0" required></div>
+            </div>
+            <div class="guest-name-fields" id="guest-name-fields" hidden></div>
+
+            <fieldset class="attendance-field">
+              <legend>Você vem à festa?</legend>
+              <div class="attendance-options">
+                <label class="selected"><input type="radio" name="attendance" value="yes" checked> Sim, eu vou! 🎉</label>
+                <label><input type="radio" name="attendance" value="no"> Não poderei ir</label>
+              </div>
+            </fieldset>
+
+            <div class="honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+            <p class="form-error" id="form-error" role="alert" hidden></p>
+            <button class="confirm-button" type="submit">Enviar confirmação <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><use href="#arrow"/></svg></button>
+            <p class="form-note">Sua resposta será usada apenas para organizar a festa.</p>
+          </form>
+          <noscript>Ative o JavaScript para enviar sua confirmação.</noscript>
+        </div>
+
+        <div class="invite-panel sizes-panel" id="sizes-panel" hidden>
+          <span class="success-mark"><svg width="29" height="29" fill="none" stroke="currentColor" stroke-width="2"><use href="#check"/></svg></span>
+          <p class="panel-kicker" id="success-greeting">Resposta recebida!</p>
+          <h2 id="tamanhos" tabindex="-1">Tamanhos do Davi</h2>
+          <p class="panel-description">Obrigado por responder! Se quiser levar um carinho para o Davi, estas são as referências de tamanho.</p>
+          <div class="size-highlights">
+            <div><span class="size-icon"><svg width="27" height="27" fill="none" stroke="currentColor" stroke-width="2"><use href="#shirt"/></svg></span><span><small>ROUPAS</small><strong>2 anos</strong></span></div>
+            <div><span class="size-icon shoe"><svg width="27" height="27" fill="none" stroke="currentColor" stroke-width="2"><use href="#shoe"/></svg></span><span><small>CALÇADOS</small><strong>19</strong></span></div>
+          </div>
+          <details class="measure-details">
+            <summary>Ver tabela de medidas <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><use href="#chevron"/></svg></summary>
+            <div class="measure-content">
+              <table>
+                <caption>Tabela de tamanhos do Davi</caption>
+                <thead><tr><th scope="col">Peça</th><th scope="col">Tamanho</th></tr></thead>
+                <tbody>
+                  <tr><td>Camisetas e blusas</td><td>2 anos</td></tr>
+                  <tr><td>Calças e shorts</td><td>2 anos</td></tr>
+                  <tr><td>Conjuntos e pijamas</td><td>2 anos</td></tr>
+                  <tr><td>Calçados</td><td>19</td></tr>
+                </tbody>
+              </table>
+              <p>As medidas em centímetros variam conforme a marca. Use o tamanho 2 anos para as roupas e o número 19 para os calçados.</p>
+            </div>
+          </details>
+          <p class="gift-note">Sua presença já é o presente mais especial. ♡</p>
+        </div>
+      </div>
+
+      <section class="gift-section" aria-labelledby="gift-title">
+        <p class="panel-kicker">Um carinho para o Davi</p>
+        <h2 id="gift-title">Tamanhos para presentes</h2>
+        <p>Roupas tamanho 2 anos e calçados número 19.</p>
+        <details class="gift-details">
+          <summary>Ver tabela de tamanhos <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><use href="#chevron"/></svg></summary>
+          <div class="measure-content">
+            <table>
+              <caption>Tamanhos do Davi</caption>
+              <thead><tr><th scope="col">Peça</th><th scope="col">Tamanho</th></tr></thead>
+              <tbody>
+                <tr><td>Camisetas e blusas</td><td>2 anos</td></tr>
+                <tr><td>Calças e shorts</td><td>2 anos</td></tr>
+                <tr><td>Conjuntos e pijamas</td><td>2 anos</td></tr>
+                <tr><td>Calçados</td><td>19</td></tr>
+              </tbody>
+            </table>
+            <p>As medidas em centímetros variam conforme a marca.</p>
+          </div>
+        </details>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
