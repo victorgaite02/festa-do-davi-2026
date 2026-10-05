@@ -159,8 +159,11 @@ form.addEventListener("submit", async (event) => {
     if (!response.ok) throw new Error(result?.error || "Não foi possível enviar sua confirmação agora. Tente novamente em instantes.");
     document.getElementById("confirmation-panel").hidden = true;
     document.getElementById("sizes-panel").hidden = false;
-    document.getElementById("success-greeting").textContent = "Resposta recebida, " + name + "!";
-    document.getElementById("tamanhos").focus();
+    document.getElementById("success-greeting").textContent = "Resposta recebida, " + name + "! 💛";
+    document.getElementById("success-description").textContent = attending
+      ? "Obrigado por confirmar sua presença! Vai ser muito especial ter você com a gente nesse dia."
+      : "Obrigado por responder! Vamos sentir sua falta nesse dia especial.";
+    document.getElementById("success-greeting").focus();
   } catch (error) {
     errorMessage.textContent = error instanceof Error && (error.message.startsWith("Não foi possível") || error.message.startsWith("Confira"))
       ? error.message
