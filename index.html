@@ -55,6 +55,11 @@
             <label for="guest-name">Seu nome</label>
             <input id="guest-name" name="name" type="text" autocomplete="name" maxlength="80" minlength="2" placeholder="Digite seu nome" required>
 
+            <div id="primary-cpf-field">
+              <label for="guest-cpf">Seu CPF</label>
+              <input id="guest-cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00" required>
+            </div>
+
             <div class="guest-counts" id="guest-counts">
               <div><label for="adults">Adultos</label><input id="adults" name="adults" type="number" min="1" max="20" value="1" required></div>
               <div><label for="children">Crianças</label><input id="children" name="children" type="number" min="0" max="20" value="0" required></div>
@@ -106,9 +111,7 @@
         </div>
       </div>
 
-      <section class="gift-section" aria-labelledby="gift-title">
-        <h2 id="gift-title">Tamanhos do Davi</h2>
-        <p>Roupas 2 anos <span aria-hidden="true">·</span> Calçados 19</p>
+      <section class="gift-section" aria-label="Consultar tamanhos do Davi">
         <details class="gift-details">
           <summary>Ver tabela de tamanhos <svg width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><use href="#chevron"/></svg></summary>
           <div class="measure-content">

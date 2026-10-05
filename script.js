@@ -7,8 +7,29 @@ const adults = document.getElementById("adults");
 const children = document.getElementById("children");
 const submitButton = form.querySelector('button[type="submit"]');
 const errorMessage = document.getElementById("form-error");
+const primaryCpfField = document.getElementById("primary-cpf-field");
+const primaryCpf = document.getElementById("guest-cpf");
 const adultNames = [];
+const adultCpfs = [];
 const childNames = [];
+
+function cpfDigits(value) { return String(value || "").replace(/\D/g, ""); }
+function formatCpf(value) {
+  return cpfDigits(value).slice(0, 11)
+    .replace(/^(\d{3})(\d)/, "$1.$2")
+    .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+    .replace(/^(\d{3})\.(\d{3})\.(\d{3})(\d)/, "$1.$2.$3-$4");
+}
+function isValidCpf(value) {
+  const digits = cpfDigits(value);
+  if (digits.length !== 11 || /^(\d)\1{10}$/.test(digits)) return false;
+  for (const position of [9, 10]) {
+    const sum = [...digits.slice(0, position)].reduce((total, digit, index) => total + Number(digit) * (position + 1 - index), 0);
+    if ((sum * 10) % 11 % 10 !== Number(digits[position])) return false;
+  }
+  return true;
+}
+primaryCpf.addEventListener("input", () => { primaryCpf.value = formatCpf(primaryCpf.value); });
 
 function createNameField(id, labelText, placeholder, value, onChange) {
   const wrapper = document.createElement("div");
@@ -29,6 +50,23 @@ function createNameField(id, labelText, placeholder, value, onChange) {
   return wrapper;
 }
 
+function createCpfField(id, labelText, value, onChange) {
+  const label = document.createElement("label");
+  const input = document.createElement("input");
+  label.htmlFor = id;
+  label.textContent = labelText;
+  input.id = id;
+  input.type = "text";
+  input.inputMode = "numeric";
+  input.autocomplete = "off";
+  input.maxLength = 14;
+  input.required = true;
+  input.placeholder = "000.000.000-00";
+  input.value = value || "";
+  input.addEventListener("input", () => { input.value = formatCpf(input.value); onChange(input.value); });
+  return [label, input];
+}
+
 function renderNameFields() {
   const attending = form.elements.attendance.value === "yes";
   const adultCount = Math.min(20, Math.max(1, Number(adults.value) || 1));
@@ -36,13 +74,15 @@ function renderNameFields() {
   nameFields.replaceChildren();
   if (attending) {
     for (let index = 0; index < adultCount - 1; index++) {
-      nameFields.append(createNameField(
+      const group = createNameField(
         "adult-name-" + index,
         "Nome do " + (index + 2) + "º adulto",
         "Nome do adulto",
         adultNames[index],
         (value) => { adultNames[index] = value; },
-      ));
+      );
+      group.append(...createCpfField("adult-cpf-" + index, "CPF do " + (index + 2) + "º adulto", adultCpfs[index], (value) => { adultCpfs[index] = value; }));
+      nameFields.append(group);
     }
     for (let index = 0; index < childCount; index++) {
       nameFields.append(createNameField(
@@ -60,6 +100,9 @@ function renderNameFields() {
 function updateAttendance() {
   const attending = form.elements.attendance.value === "yes";
   counts.hidden = !attending;
+  primaryCpfField.hidden = !attending;
+  primaryCpf.disabled = !attending;
+  primaryCpf.required = attending;
   adults.disabled = !attending;
   children.disabled = !attending;
   adults.required = attending;
@@ -84,12 +127,21 @@ form.addEventListener("submit", async (event) => {
   const name = String(data.get("name") || "").trim();
   const adultCount = attending ? Number(data.get("adults")) : 0;
   const childCount = attending ? Number(data.get("children")) : 0;
+  const cpfs = attending ? [primaryCpf.value, ...Array.from({ length: adultCount - 1 }, (_, index) => adultCpfs[index] || "")].map(cpfDigits) : [];
+  if (cpfs.some((cpf) => !isValidCpf(cpf)) || new Set(cpfs).size !== cpfs.length) {
+    errorMessage.textContent = "Confira os CPFs dos adultos antes de enviar.";
+    errorMessage.hidden = false;
+    submitButton.disabled = false;
+    submitButton.firstChild.textContent = "Enviar confirmação ";
+    return;
+  }
   const payload = {
     name,
     attending,
     adults: adultCount,
     children: childCount,
     adultNames: attending ? [name, ...adultNames.slice(0, adultCount - 1).map((value) => String(value || "").trim())] : [],
+    adultCpfs: cpfs,
     childNames: attending ? childNames.slice(0, childCount).map((value) => String(value || "").trim()) : [],
     website: String(data.get("website") || ""),
   };
