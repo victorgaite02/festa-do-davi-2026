@@ -28,13 +28,13 @@
         <img class="top-bird" src="images/arara.png" alt="Arara vermelha tocando flauta">
         <p class="invite-kicker">Uma festa no ritmo do</p>
         <h1 class="invite-name" aria-label="Davi"><span>D</span><span>a</span><span>v</span><span>i</span></h1>
-        <p class="invite-intro">Uma tarde de música, brincadeiras e muita alegria espera por você!</p>
+        <p class="invite-intro">Prepare-se para uma tarde cheia de música, brincadeiras e alegria!</p>
       </div>
 
       <div class="event-details" aria-label="Informações da festa">
         <div><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><use href="#calendar"/></svg><strong>12/10</strong><span>segunda-feira</span></div>
         <div><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><use href="#clock"/></svg><strong>16h</strong><span>vem festejar!</span></div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Residencial%20%C3%81guas%20do%20Cabo%20Branco%2C%20%C3%81guas%20Claras%2C%20Bras%C3%ADlia%20DF" target="_blank" rel="noopener noreferrer" aria-label="Abrir localização no mapa"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><use href="#pin"/></svg><strong>Águas do Cabo Branco</strong><span>Águas Claras · abrir mapa ↗</span></a>
+        <div class="event-location"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><use href="#pin"/></svg><strong>Residencial Águas do Cabo Branco</strong><span>Águas Claras</span><a href="https://www.google.com/maps/search/?api=1&amp;query=Residencial%20%C3%81guas%20do%20Cabo%20Branco%2C%20%C3%81guas%20Claras%2C%20Bras%C3%ADlia%20DF" target="_blank" rel="noopener noreferrer">Abrir mapa ↗</a></div>
       </div>
 
       <div class="invite-body">
@@ -48,9 +48,9 @@
         </div>
 
         <div class="invite-panel" id="confirmation-panel">
-          <p class="panel-kicker">Você faz parte dessa festa!</p>
+          <p class="panel-kicker">Você faz parte desse show! 🎶</p>
           <h2>Confirme sua presença</h2>
-          <p class="panel-description">Conte para a família do Davi se você vem celebrar com a gente.</p>
+          <p class="panel-description">Conte pra gente se você vem entrar no ritmo e celebrar esse dia especial com o Davi. 💛</p>
           <form id="rsvp-form" class="confirm-form">
             <label for="guest-name">Seu nome</label>
             <input id="guest-name" name="name" type="text" autocomplete="name" maxlength="80" minlength="2" placeholder="Digite seu nome" required>
@@ -84,12 +84,13 @@
 
         <div class="invite-panel sizes-panel" id="sizes-panel" hidden>
           <span class="success-mark"><svg width="29" height="29" fill="none" stroke="currentColor" stroke-width="2"><use href="#check"/></svg></span>
-          <p class="panel-kicker" id="success-greeting">Resposta recebida!</p>
-          <h2 id="tamanhos" tabindex="-1">Tamanhos do Davi</h2>
-          <p class="panel-description">Obrigado por responder! Se quiser levar um carinho para o Davi, estas são as referências de tamanho.</p>
+          <h2 id="success-greeting" class="response-title" tabindex="-1">Resposta recebida! 💛</h2>
+          <p class="panel-description" id="success-description">Obrigado por confirmar sua presença! Vai ser muito especial ter você com a gente nesse dia.</p>
+          <h3 class="sizes-title">Tamanhos do Davi</h3>
+          <p class="panel-description">Caso queira presentear o Davi, deixamos aqui algumas referências de tamanho:</p>
           <div class="size-highlights">
             <div><small>ROUPAS</small><strong>2 anos</strong></div>
-            <div><small>CALÇADOS</small><strong>19</strong></div>
+            <div><small>CALÇADOS</small><strong>18 ou 19</strong></div>
           </div>
           <details class="measure-details">
             <summary>Ver tabela de medidas <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><use href="#chevron"/></svg></summary>
@@ -101,10 +102,10 @@
                   <tr><td>Camisetas e blusas</td><td>2 anos</td></tr>
                   <tr><td>Calças e shorts</td><td>2 anos</td></tr>
                   <tr><td>Conjuntos e pijamas</td><td>2 anos</td></tr>
-                  <tr><td>Calçados</td><td>19</td></tr>
+                  <tr><td>Calçados</td><td>18 ou 19</td></tr>
                 </tbody>
               </table>
-              <p>As medidas em centímetros variam conforme a marca. Use o tamanho 2 anos para as roupas e o número 19 para os calçados.</p>
+              <p>As medidas em centímetros variam conforme a marca. Use o tamanho 2 anos para as roupas e os números 18 ou 19 para os calçados.</p>
             </div>
           </details>
           <p class="gift-note">Sua presença já é o presente mais especial. ♡</p>
@@ -122,7 +123,7 @@
                 <tr><td>Camisetas e blusas</td><td>2 anos</td></tr>
                 <tr><td>Calças e shorts</td><td>2 anos</td></tr>
                 <tr><td>Conjuntos e pijamas</td><td>2 anos</td></tr>
-                <tr><td>Calçados</td><td>19</td></tr>
+                <tr><td>Calçados</td><td>18 ou 19</td></tr>
               </tbody>
             </table>
             <p>As medidas em centímetros variam conforme a marca.</p>
